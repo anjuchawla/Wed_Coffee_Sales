@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Week4_Coffee_Sales
+namespace Coffee_Sales
 {
-    public partial class Form1 : Form
+    public partial class frmCoffeeShop : Form
     {
-        public Form1()
+        public frmCoffeeShop()
         {
             InitializeComponent();
         }
