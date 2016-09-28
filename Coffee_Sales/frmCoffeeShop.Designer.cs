@@ -38,7 +38,7 @@
             this.btnCalculate = new System.Windows.Forms.Button();
             this.chkTakeout = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpCoffee = new System.Windows.Forms.GroupBox();
             this.rdoIcedCappuccino = new System.Windows.Forms.RadioButton();
             this.rdoIcedLatte = new System.Windows.Forms.RadioButton();
             this.rdoLatte = new System.Windows.Forms.RadioButton();
@@ -53,7 +53,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpCoffee.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +86,7 @@
             this.groupBox1.Controls.Add(this.btnCalculate);
             this.groupBox1.Controls.Add(this.chkTakeout);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.grpCoffee);
             this.groupBox1.Location = new System.Drawing.Point(27, 108);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(593, 266);
@@ -136,6 +136,7 @@
             this.btnCalculate.TabIndex = 4;
             this.btnCalculate.Text = "&Calculate Selection";
             this.btnCalculate.UseVisualStyleBackColor = true;
+            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
             // 
             // chkTakeout
             // 
@@ -156,19 +157,19 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "&Quantity";
             // 
-            // groupBox2
+            // grpCoffee
             // 
-            this.groupBox2.Controls.Add(this.rdoIcedCappuccino);
-            this.groupBox2.Controls.Add(this.rdoIcedLatte);
-            this.groupBox2.Controls.Add(this.rdoLatte);
-            this.groupBox2.Controls.Add(this.rdoEspresso);
-            this.groupBox2.Controls.Add(this.rdoCappuccino);
-            this.groupBox2.Location = new System.Drawing.Point(347, 43);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 194);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Coffee Selections";
+            this.grpCoffee.Controls.Add(this.rdoIcedCappuccino);
+            this.grpCoffee.Controls.Add(this.rdoIcedLatte);
+            this.grpCoffee.Controls.Add(this.rdoLatte);
+            this.grpCoffee.Controls.Add(this.rdoEspresso);
+            this.grpCoffee.Controls.Add(this.rdoCappuccino);
+            this.grpCoffee.Location = new System.Drawing.Point(347, 43);
+            this.grpCoffee.Name = "grpCoffee";
+            this.grpCoffee.Size = new System.Drawing.Size(200, 194);
+            this.grpCoffee.TabIndex = 2;
+            this.grpCoffee.TabStop = false;
+            this.grpCoffee.Text = "Coffee Selections";
             // 
             // rdoIcedCappuccino
             // 
@@ -318,10 +319,11 @@
             this.Name = "frmCoffeeShop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Coffee Selection";
+            this.Load += new System.EventHandler(this.frmCoffeeShop_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.grpCoffee.ResumeLayout(false);
+            this.grpCoffee.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -341,7 +343,7 @@
         private System.Windows.Forms.Button btnCalculate;
         private System.Windows.Forms.CheckBox chkTakeout;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpCoffee;
         private System.Windows.Forms.RadioButton rdoIcedCappuccino;
         private System.Windows.Forms.RadioButton rdoIcedLatte;
         private System.Windows.Forms.RadioButton rdoLatte;
