@@ -52,6 +52,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnNewOrder = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.grpCoffee.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -127,6 +128,7 @@
             this.btnClear.TabIndex = 5;
             this.btnClear.Text = "C&lear for Next Item";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnCalculate
             // 
@@ -181,6 +183,7 @@
             this.rdoIcedCappuccino.TabStop = true;
             this.rdoIcedCappuccino.Text = "Iced Ca&ppuccino";
             this.rdoIcedCappuccino.UseVisualStyleBackColor = true;
+            this.rdoIcedCappuccino.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // rdoIcedLatte
             // 
@@ -192,6 +195,7 @@
             this.rdoIcedLatte.TabStop = true;
             this.rdoIcedLatte.Text = "&Iced Latte";
             this.rdoIcedLatte.UseVisualStyleBackColor = true;
+            this.rdoIcedLatte.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // rdoLatte
             // 
@@ -203,6 +207,7 @@
             this.rdoLatte.TabStop = true;
             this.rdoLatte.Text = "La&tte";
             this.rdoLatte.UseVisualStyleBackColor = true;
+            this.rdoLatte.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // rdoEspresso
             // 
@@ -214,6 +219,7 @@
             this.rdoEspresso.TabStop = true;
             this.rdoEspresso.Text = "Espress&o";
             this.rdoEspresso.UseVisualStyleBackColor = true;
+            this.rdoEspresso.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // rdoCappuccino
             // 
@@ -225,6 +231,7 @@
             this.rdoCappuccino.TabStop = true;
             this.rdoCappuccino.Text = "C&appuccino";
             this.rdoCappuccino.UseVisualStyleBackColor = true;
+            this.rdoCappuccino.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -297,18 +304,30 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(545, 557);
+            this.btnExit.Location = new System.Drawing.Point(520, 557);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 24);
+            this.btnExit.Size = new System.Drawing.Size(100, 30);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "E&xit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnNewOrder
+            // 
+            this.btnNewOrder.Location = new System.Drawing.Point(408, 558);
+            this.btnNewOrder.Name = "btnNewOrder";
+            this.btnNewOrder.Size = new System.Drawing.Size(100, 29);
+            this.btnNewOrder.TabIndex = 5;
+            this.btnNewOrder.Text = "&New Order";
+            this.btnNewOrder.UseVisualStyleBackColor = true;
+            this.btnNewOrder.Click += new System.EventHandler(this.btnNewOrder_Click);
             // 
             // frmCoffeeShop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 621);
+            this.Controls.Add(this.btnNewOrder);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -357,6 +376,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnNewOrder;
     }
 }
 

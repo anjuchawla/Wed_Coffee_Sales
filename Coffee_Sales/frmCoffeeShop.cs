@@ -22,9 +22,10 @@ namespace Coffee_Sales
     {
         //module level variables
         //objects are initialised to null, numbers to 0
-        private RadioButton selectedRadioButton;
         private decimal subTotalAmount = 0, totalAmount;
-        private int customerCount;
+        private RadioButton selectedRadioButton;
+        
+       // private int customerCount;
 
         //module level constants
         const decimal TaxRate = 0.13m;
@@ -48,8 +49,10 @@ namespace Coffee_Sales
             //one coffee in different quantities
 
             //local variables-do not have a default value
-            int quantity;
-            decimal price, tax, itemAmount;
+            int quantity = 0;
+            decimal price=0, tax, itemAmount;
+
+            chkTakeout.Enabled = false;
 
             if (txtQuantity.Text != String.Empty)
             {
@@ -85,12 +88,39 @@ namespace Coffee_Sales
                             price = CappuccinoPrice;
                         else if (rdoEspresso.Checked)
                             price = EspressoPrice;
-                        else if (rdoIcedLatte.Checked)
+                        else if (rdoLatte.Checked)
                             price = LattePrice;
-                        else    //if(rdoIcedLatte.Checked || rdoIcedCappuccino.Checked)-no need of an if here since no other option
+                        else   //if(rdoIcedLatte.Checked || rdoIcedCappuccino.Checked)-no need of an if here since no other option
                             price = IcedPrice;
+
                         
                         */
+                        //calculations
+                        itemAmount = price * quantity;
+                       // subTotalAmount = subTotalAmount + itemAmount;
+                        subTotalAmount += itemAmount;
+
+                        if (chkTakeout.Checked)
+                        {
+                            tax = TaxRate * subTotalAmount;
+
+                        }
+                        else
+                        {
+                            tax = 0;
+                        }
+
+                        totalAmount = subTotalAmount + tax;
+
+                        //display these output values 
+                        txtItemAmount.Text = itemAmount.ToString("c");
+                        txtSubtotal.Text = subTotalAmount.ToString("c");
+                        txtTax.Text = tax.ToString("c");
+                        txtTotalDue.Text = totalAmount.ToString("c");
+
+
+
+
 
 
                     }// if coffee selected
@@ -125,6 +155,53 @@ namespace Coffee_Sales
         {
 
 
+        }
+
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            //assign selectedRadioButton a value depending on the radio button selected
+            selectedRadioButton =(RadioButton) sender;
+         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            //clear the user input and get back to start default state
+            ClearInput();
+
+        }
+
+        private void ClearInput()
+        {
+            txtQuantity.Clear();
+            txtItemAmount.Clear();
+            if (selectedRadioButton != null)
+            {
+                selectedRadioButton.Checked = false;
+                selectedRadioButton = null;
+            }
+        }
+
+        private void btnNewOrder_Click(object sender, EventArgs e)
+        {
+            //clear for next order
+            //Application.Restart();
+            ClearInput();
+            txtSubtotal.Clear();
+            txtTax.Clear();
+            txtTotalDue.Clear();
+            subTotalAmount = 0;
+            totalAmount = 0;
+            if(chkTakeout.Checked)
+                chkTakeout.Checked = false;
+            chkTakeout.Enabled = true;
+            txtQuantity.Focus();
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            //close the form
+            this.Close();
         }
     }
 }
