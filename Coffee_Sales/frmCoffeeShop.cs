@@ -57,7 +57,9 @@ namespace Coffee_Sales
             btnNewOrder.Enabled = true;
             btnClear.Enabled = true;
 
-            if (txtQuantity.Text != String.Empty)
+            //  if (txtQuantity.Text != String.Empty)
+            //   {
+            try
             {
                 quantity = int.Parse(txtQuantity.Text);
                 //quantity= Convert.ToInt32(txtQuantity.Text);
@@ -97,7 +99,7 @@ namespace Coffee_Sales
                         else   //if(rdoIcedLatte.Checked || rdoIcedCappuccino.Checked)-no need of an if here since no other option
                             price = IcedPrice;
 
-                        
+
                         */
                         //calculations
                         itemAmount = price * quantity;
@@ -128,6 +130,7 @@ namespace Coffee_Sales
 
 
                     }// if coffee selected
+
                     else
                     {
                         MessageBox.Show("Please select a coffee type", "Input Missing",
@@ -144,14 +147,47 @@ namespace Coffee_Sales
                     txtQuantity.SelectAll();
                     txtQuantity.Focus();
                 }
-            }//if quantity is provided
-            else
+                // }//if quantity is provided
+
+            }//try
+            catch (FormatException quantityFE)
             {
-                MessageBox.Show("Please enter the number of coffees needed", "Input Missing",
-                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtQuantity.Text == String.Empty)
+                {
+                    MessageBox.Show("Quantity cannot be left blank, MUST be whole number.", "Quantity Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    //MessageBox.Show(quantityFE.Message);
+                    MessageBox.Show("Quantity provided MUST be a whole number", "Quantity Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                txtQuantity.SelectAll(); //txtQuantity.Clear();
                 txtQuantity.Focus();
 
             }
+            catch (OverflowException quantityOE)
+            {
+                MessageBox.Show("Quantity provided out of range", "Quantity Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                txtQuantity.SelectAll(); //txtQuantity.Clear();
+                txtQuantity.Focus();
+            }
+            catch (Exception quantityEx)
+            {
+                MessageBox.Show(quantityEx.Message, "Quantity Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+                txtQuantity.SelectAll(); //txtQuantity.Clear();
+                txtQuantity.Focus();
+
+        }
+
+            /* else
+             {
+                 MessageBox.Show("Please enter the number of coffees needed", "Input Missing",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 txtQuantity.Focus();
+
+             }*/
 
         }
 
