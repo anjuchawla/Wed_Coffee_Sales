@@ -65,7 +65,7 @@
             this.label1.Location = new System.Drawing.Point(243, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(158, 29);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 5;
             this.label1.Text = "Coffee Shop";
             // 
             // label2
@@ -122,6 +122,7 @@
             // 
             // btnClear
             // 
+            this.btnClear.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClear.Location = new System.Drawing.Point(135, 137);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 53);
@@ -244,7 +245,7 @@
             this.groupBox3.Location = new System.Drawing.Point(27, 392);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(593, 159);
-            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Amount Due";
             // 
@@ -307,7 +308,7 @@
             this.btnExit.Location = new System.Drawing.Point(520, 557);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 30);
-            this.btnExit.TabIndex = 1;
+            this.btnExit.TabIndex = 2;
             this.btnExit.Text = "E&xit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -317,15 +318,17 @@
             this.btnNewOrder.Location = new System.Drawing.Point(408, 558);
             this.btnNewOrder.Name = "btnNewOrder";
             this.btnNewOrder.Size = new System.Drawing.Size(100, 29);
-            this.btnNewOrder.TabIndex = 5;
+            this.btnNewOrder.TabIndex = 1;
             this.btnNewOrder.Text = "&New Order";
             this.btnNewOrder.UseVisualStyleBackColor = true;
             this.btnNewOrder.Click += new System.EventHandler(this.btnNewOrder_Click);
             // 
             // frmCoffeeShop
             // 
+            this.AcceptButton = this.btnCalculate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClear;
             this.ClientSize = new System.Drawing.Size(645, 621);
             this.Controls.Add(this.btnNewOrder);
             this.Controls.Add(this.btnExit);

@@ -24,8 +24,8 @@ namespace Coffee_Sales
         //objects are initialised to null, numbers to 0
         private decimal subTotalAmount = 0, totalAmount;
         private RadioButton selectedRadioButton;
-        
-       // private int customerCount;
+
+        // private int customerCount;
 
         //module level constants
         const decimal TaxRate = 0.13m;
@@ -50,13 +50,17 @@ namespace Coffee_Sales
 
             //local variables-do not have a default value
             int quantity = 0;
-            decimal price=0, tax, itemAmount;
+            decimal price = 0, tax, itemAmount;
 
+            //settings
             chkTakeout.Enabled = false;
+            btnNewOrder.Enabled = true;
+            btnClear.Enabled = true;
 
             if (txtQuantity.Text != String.Empty)
             {
                 quantity = int.Parse(txtQuantity.Text);
+                //quantity= Convert.ToInt32(txtQuantity.Text);
                 if (quantity > 0)
                 {
                     if (selectedRadioButton != null) //coffee is selected
@@ -76,9 +80,9 @@ namespace Coffee_Sales
                             case "rdoLatte":
                                 price = LattePrice;
                                 break;
-                         //   default:
-                           //     price = 0;
-                           //     break;
+                                //   default:
+                                //     price = 0;
+                                //     break;
 
                         }//switch
 
@@ -97,7 +101,7 @@ namespace Coffee_Sales
                         */
                         //calculations
                         itemAmount = price * quantity;
-                       // subTotalAmount = subTotalAmount + itemAmount;
+                        // subTotalAmount = subTotalAmount + itemAmount;
                         subTotalAmount += itemAmount;
 
                         if (chkTakeout.Checked)
@@ -126,42 +130,44 @@ namespace Coffee_Sales
                     }// if coffee selected
                     else
                     {
-                            MessageBox.Show("Please select a coffee type", "Input Missing",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Please select a coffee type", "Input Missing",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
-                        }
-                    }//quantity > 0
-                    else
-                    {
-                        MessageBox.Show("Please enter a value greater than 0 for the quantity of coffees needed", "Input Error",
-                                              MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        txtQuantity.SelectAll();
-                        txtQuantity.Focus();
                     }
-                }//if quantity is provided
+                }//quantity > 0
                 else
                 {
-                    MessageBox.Show("Please enter the number of coffees needed", "Input Missing",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtQuantity.Focus();
+                    MessageBox.Show("Please enter a value greater than 0 for the quantity of coffees needed", "Input Error",
+                                          MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                    txtQuantity.SelectAll();
+                    txtQuantity.Focus();
                 }
+            }//if quantity is provided
+            else
+            {
+                MessageBox.Show("Please enter the number of coffees needed", "Input Missing",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtQuantity.Focus();
 
             }
 
+        }
+
         private void frmCoffeeShop_Load(object sender, EventArgs e)
         {
-
+            //default setting when form is loaded
+            btnClear.Enabled = false;
+            btnNewOrder.Enabled = false;
 
         }
 
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             //assign selectedRadioButton a value depending on the radio button selected
-            selectedRadioButton =(RadioButton) sender;
-         }
+            selectedRadioButton = (RadioButton)sender;
+        }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -184,17 +190,25 @@ namespace Coffee_Sales
         private void btnNewOrder_Click(object sender, EventArgs e)
         {
             //clear for next order
-            //Application.Restart();
-            ClearInput();
-            txtSubtotal.Clear();
-            txtTax.Clear();
-            txtTotalDue.Clear();
-            subTotalAmount = 0;
-            totalAmount = 0;
-            if(chkTakeout.Checked)
-                chkTakeout.Checked = false;
-            chkTakeout.Enabled = true;
-            txtQuantity.Focus();
+            DialogResult confirm;
+
+            confirm = MessageBox.Show("Are you sure you want to place a new order?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+            if (confirm == DialogResult.Yes)
+            {
+                ClearInput();
+                btnClear.Enabled = false;
+                btnNewOrder.Enabled = false;
+                txtSubtotal.Clear();
+                txtTax.Clear();
+                txtTotalDue.Clear();
+                subTotalAmount = 0;
+                totalAmount = 0;
+                if (chkTakeout.Checked)
+                    chkTakeout.Checked = false;
+                chkTakeout.Enabled = true;
+                txtQuantity.Focus();
+            }
 
         }
 
