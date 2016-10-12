@@ -22,7 +22,8 @@ namespace Coffee_Sales
     {
         //module level variables
         //objects are initialised to null, numbers to 0
-        private decimal subTotalAmount = 0, totalAmount;
+        private decimal subTotalAmount = 0, totalAmount, grandTotal;
+        private int customerCount;
         private RadioButton selectedRadioButton;
 
         // private int customerCount;
@@ -56,6 +57,8 @@ namespace Coffee_Sales
             chkTakeout.Enabled = false;
             btnNewOrder.Enabled = true;
             btnClear.Enabled = true;
+            tsmiClearItem.Enabled = true;
+            tsmiNewOrder.Enabled = true;
 
             //  if (txtQuantity.Text != String.Empty)
             //   {
@@ -196,6 +199,10 @@ namespace Coffee_Sales
             //default setting when form is loaded
             btnClear.Enabled = false;
             btnNewOrder.Enabled = false;
+            tsmiClearItem.Enabled = false;
+            tsmiNewOrder.Enabled = false;
+            //rdoCappuccino.Checked = false;
+           //rdoCappuccino.AutoCheck = true;
 
         }
 
@@ -232,20 +239,108 @@ namespace Coffee_Sales
 
             if (confirm == DialogResult.Yes)
             {
+                //clearing the controls
                 ClearInput();
                 btnClear.Enabled = false;
                 btnNewOrder.Enabled = false;
+                tsmiNewOrder.Enabled = false;
+                tsmiClearItem.Enabled = false;
                 txtSubtotal.Clear();
                 txtTax.Clear();
-                txtTotalDue.Clear();
-                subTotalAmount = 0;
-                totalAmount = 0;
+                txtTotalDue.Clear();              
                 if (chkTakeout.Checked)
                     chkTakeout.Checked = false;
                 chkTakeout.Enabled = true;
                 txtQuantity.Focus();
+
+                //add the totals to summary totals
+                if(subTotalAmount > 0)
+                {
+                    grandTotal += totalAmount;
+                    customerCount++;
+                }
+                //reset the order totals
+                subTotalAmount = 0;
+                totalAmount = 0;
             }
 
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //display the about information
+            AboutBox1 information = new Coffee_Sales.AboutBox1();
+            information.ShowDialog(); 
+        }
+
+        private void tsmiFont_Click(object sender, EventArgs e)
+        {
+            //allow the user to select a font for the output values
+            Font currentFont;
+
+            //save the current font
+            //currentFont = txtSubtotal.Font;
+            //show the dialog box
+           // DialogResult response = 
+            fontDialog1.ShowDialog();
+           // if(response == DialogResult.OK)
+            currentFont = fontDialog1.Font;
+            txtSubtotal.Font = currentFont;
+            txtTax.Font = currentFont;
+            txtTotalDue.Font = currentFont;
+
+
+
+        }
+
+        private void tsmiColor_Click(object sender, EventArgs e)
+        {
+            //allow the user to select the for color of the output
+
+            Color currentColor;
+            //display the color dialog box
+            colorDialog1.ShowDialog();
+            //save the selected color
+            currentColor = colorDialog1.Color;
+            //backcolor changes when text boxes are made read-only
+            //hence color of output does not change
+            //irrelevant assignments to make it work
+            txtSubtotal.BackColor = txtSubtotal.BackColor;
+            txtTax.BackColor = txtTax.BackColor;
+            txtTotalDue.BackColor = txtTotalDue.BackColor;
+            //set the color of the output text
+            txtSubtotal.ForeColor = currentColor;
+            txtTax.ForeColor = currentColor;
+            txtTotalDue.ForeColor = currentColor;
+
+        }
+
+        private void tsmiSummary_Click(object sender, EventArgs e)
+        {
+            //show the summary information
+            decimal average;
+            string message;
+
+            //customer is in the middle of an order
+            if(totalAmount != 0)
+            {
+                btnNewOrder_Click(sender, e);
+            }
+            if(customerCount > 0)//customers have been served
+            {
+                average = grandTotal / customerCount;
+                message = "Number of Orders: " + customerCount.ToString() +
+                    "\n" + "Total Sales: " + grandTotal.ToString("c") +
+                    Environment.NewLine + "Average Sales: " + average.ToString("c");
+
+                MessageBox.Show(message, "Coffee Sales Summary", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("No sales made yet...no summary information to display",
+                    "Coffee Sales Summary", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
